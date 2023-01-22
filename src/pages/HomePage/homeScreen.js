@@ -18,7 +18,7 @@ const Box = ({ title, body, onPress }) => (
   function HomeScreen() {
    
     const box1Title = "My friends";
-    const box1Body = "Extict friends / Add a friend ";
+    const box1Body = "Extict friends / Add a new friend ";
     const box1Press = () => {
         navigation.navigate('friend');
     };
