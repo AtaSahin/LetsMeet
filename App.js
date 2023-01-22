@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import homeScreen from './src/pages/HomePage/homeScreen';
 import InputExample from './src/pages/SplashPage/splashScreen';
 import FriendList from './src/pages/menu/myFriendsPage/friendList';
-
+import WorldMap from './src/pages/menu/map/worldMap';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -17,7 +17,7 @@ export default function App() {
       screenOptions={{
         headerShown: false
       }}>
-      
+        <Stack.Screen name="map" component={WorldMap} />
         <Stack.Screen name="friend" component={FriendList} />
         <Stack.Screen name="Home" component={homeScreen} />
         <Stack.Screen name="splash" component={InputExample} />
