@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView, LayoutAnimation, Platform,UIManager,Animated } from 'react-native';
 import { Image } from 'react-native';
 import styles from './splashScreen.styles';
-import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 
 
 const InputExample = () => {
-  
-
   const handleContinueButtonPress = () => {
-    const navigation = useNavigation();
     navigation.navigate('Home');
   };
+const navigation=useNavigation()
   
   const [text, setText] = useState('');
   const [nicknameList, setNicknameList] = useState([]);
@@ -21,6 +20,8 @@ const InputExample = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [successNickname, setSuccessNickname] = useState('');
   const [animation, setAnimation] = useState(new Animated.Value(0));
+
+
   useEffect(() => {
     if (isSuccess) {
       Animated.timing(animation, {
@@ -105,14 +106,17 @@ const InputExample = () => {
     </View>
     {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
     {isSuccess && (
+
     <View>
+      
     <Text style={styles.success}>Congratulations, you've successfully registered as {successNickname}!</Text>
-    <TouchableOpacity style={styles.continueButton} onPress={handleContinueButtonPress}>
+    <TouchableOpacity style={styles.continueButton} onPress={()=> navigation.navigate("Home")}>
     <Text style={styles.continueButtonText}>Continue as {successNickname}</Text>
     </TouchableOpacity>
     </View>
     )}
     </View>
+
     {isListVisible && (
     <View style={styles.listContainer}>
     <ScrollView>
