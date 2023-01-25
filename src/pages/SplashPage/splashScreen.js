@@ -4,6 +4,9 @@ import { Image } from 'react-native';
 import styles from './splashScreen.styles';
 import { useNavigation } from '@react-navigation/native';
 import { LogBox } from 'react-native';
+import { AsyncStorage } from 'react-native';
+
+
 LogBox.ignoreAllLogs();
 
 
@@ -11,6 +14,14 @@ const InputExample = () => {
   const handleContinueButtonPress = () => {
     navigation.navigate('Home');
   };
+  const saveNicknameList = async (nicknameList) => {
+    try {
+      await AsyncStorage.setItem('nicknameList', JSON.stringify(nicknameList));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 const navigation=useNavigation()
   
   const [text, setText] = useState('');
@@ -50,8 +61,22 @@ const navigation=useNavigation()
       setIsSuccess(true);
       setText('');
       setErrorMessage('');
+      saveNicknameList(nicknameList);
     }
   }
+  const retrieveNicknameList = async () => {
+    try {
+      const nicknameList = await AsyncStorage.getItem('nicknameList');
+      if (nicknameList !== null) {
+        setNicknameList(JSON.parse(nicknameList));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    retrieveNicknameList();
+  }, []);
 
   const handleListPress = () => {
     setIsListVisible(!isListVisible);

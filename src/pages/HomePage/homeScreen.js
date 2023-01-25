@@ -18,7 +18,7 @@ const Box = ({ title, body, onPress }) => (
   function HomeScreen() {
    
     const box1Title = "My friends";
-    const box1Body = "Extict friends / Add a new friend ";
+    const box1Body = "Extinct friends / Add a friend ";
     const box1Press = () => {
         navigation.navigate('friend');
     };
@@ -72,7 +72,7 @@ const Box = ({ title, body, onPress }) => (
   
         data={boxes}
         
-        renderItem={({ item }) => <Box title={item.title} body={item.body} onPress={()=>navigation.navigate("friend")}  style={{width: '100%'}} />}
+        renderItem={({ item }) => <Box title={item.title} body={item.body} onPress={()=>navigation.navigate("map")}  style={{width: '100%'}} />}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={{flexDirection: 'column'}}
         showsVerticalScrollIndicator={false}
