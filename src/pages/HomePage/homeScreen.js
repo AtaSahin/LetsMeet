@@ -1,85 +1,61 @@
-import React from 'react';
-import { View, Text, TouchableOpacity,StyleSheet,FlatList, Button } from 'react-native';
-import styles from './homeScreen.styles';
+import React, { useState } from 'react';
+import {
+  ScrollView,
+  TouchableOpacity,
+  View,
+  Text,
+  RefreshControl,
+  StyleSheet,
+  Button
+} from 'react-native';
+import searchFriend from '../searchFriend/searchFriend';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { withNavigation } from 'react-navigation';
+import styles from './homeScreen.styles';
+import SplashScreen from 'react-native-splash-screen';
 
-const Box = ({ title, body, onPress }) => (
-   
-    <TouchableOpacity style={styles.boxContainer} onPress={onPress}>
-      <Text style={styles.header}>{title}</Text>
-      <Text style={styles.body}>{body}</Text>
-    
-    </TouchableOpacity>
+
+const MyComponent = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
+  const handlePress = () => {
+    navigation.navigate('searchFriend');
+  };
+
+
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // do some refreshing logic here
+    setTimeout(() => setRefreshing(false), 200);
+  };
+
+  return (
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <View style={styles.boxContainer}>
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <TouchableOpacity
+          key={i}
+          style={[styles.box, styles.shadow]}
+          onPress={index == 0 ? handlePress : () => this.props.navigation.navigate('splash')}
+        >
+        <Text>{index == 0 ? "Go to searchFriendPage" : "Go to SplashPage"}</Text>
+        <Text style={styles.header}>Box {i}</Text>
+            <Text style={styles.body}>
+              {index == 0 ? "Friend List" : "Check for friends "+ i }
+            </Text>
+      </TouchableOpacity>
+        ))}
+
+
+      </View>
+    </ScrollView>
   );
+};
 
-  
-  function HomeScreen() {
-   
-    const box1Title = "My friends";
-    const box1Body = "Extinct friends / Add a friend ";
-    const box1Press = () => {
-        navigation.navigate('friend');
-    };
-    const handleBox1Press = () => console.log("Arkadaşlarım bölümüne gidildi");
-    const box2Title = "Meeting map";
-    const box2Body = "Current meetings/ Pending meeting locations";
-    const handleBox2Press = () => {
-        navigation.navigate();
-    };
-    const box3Title = "Leader Boards";
-    const box3Body = "Winners of this month according to by punctuality";
-    const handleBox3Press = () => console.log("Box 3 pressed");
-    const box4Title = "Previous Meeting";
-    const box4Body = "See previous meetings";
-    const handleBox4Press = () => console.log("Box 4 pressed");
-    const box5Title = "Any Complaints about App?";
-    const box5Body = "Don't be shy..Just tell me :)";
-    const handleBox5Press = () => console.log("Box 5 pressed");
-    const boxes = [
-        {
-            title: box1Title,
-            body: box1Body,
-            onPress:box1Press
-        },
-        {
-            title: box2Title,
-            body: box2Body,
-            onPress: handleBox2Press
-        },
-        {
-            title: box3Title,
-            body: box3Body,
-            onPress: handleBox3Press
-        },
-        {
-            title: box4Title,
-            body: box4Body,
-            onPress: handleBox4Press
-        },
-        {
-            title: box5Title,
-            body: box5Body,
-            onPress: handleBox5Press
-        },
-    ];
-    const navigation=useNavigation()
-    return (
-    <View style={styles.container}>
-        
-        <FlatList
-  
-        data={boxes}
-        
-        renderItem={({ item }) => <Box title={item.title} body={item.body} onPress={()=>navigation.navigate("map")}  style={{width: '100%'}} />}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{flexDirection: 'column'}}
-        showsVerticalScrollIndicator={false}
-    />
-    
-    </View>
-    );
-}
 
-export default HomeScreen;
+export default MyComponent;
