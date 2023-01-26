@@ -9,18 +9,25 @@ import {
   Button
 } from 'react-native';
 import searchFriend from '../searchFriend/searchFriend';
-import { createStackNavigator } from 'react-navigation-stack';
+import { useNavigation } from '@react-navigation/native';
+import { withNavigation } from 'react-navigation';
 import styles from './homeScreen.styles';
 import SplashScreen from 'react-native-splash-screen';
-import { withNavigation } from 'react-navigation';
+
 
 const MyComponent = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
+  const handlePress = () => {
+    navigation.navigate('searchFriend');
+  };
+
+
 
   const onRefresh = () => {
     setRefreshing(true);
     // do some refreshing logic here
-    setTimeout(() => setRefreshing(false), 2000);
+    setTimeout(() => setRefreshing(false), 200);
   };
 
   return (
@@ -32,21 +39,18 @@ const MyComponent = () => {
       <View style={styles.boxContainer}>
         {[1, 2, 3, 4, 5, 6].map(i => (
           <TouchableOpacity
-          key={2}
+          key={i}
           style={[styles.box, styles.shadow]}
-          onPress={() => this.props.navigation.navigate('splash')}
-      >
-          <Text>Go to SplashPage</Text>
-          <Text style={styles.header}>Box 2</Text>
-          <Text style={styles.body}>
-          This is the body text of box 2.
-          </Text>
+          onPress={index == 0 ? handlePress : () => this.props.navigation.navigate('splash')}
+        >
+        <Text>{index == 0 ? "Go to searchFriendPage" : "Go to SplashPage"}</Text>
+        <Text style={styles.header}>Box {i}</Text>
+            <Text style={styles.body}>
+              {index == 0 ? "Friend List" : "Check for friends "+ i }
+            </Text>
       </TouchableOpacity>
         ))}
-<Button
-  title="Go Back"
-  onPress={() => this.props.navigation.pop()}
-/>
+
 
       </View>
     </ScrollView>
