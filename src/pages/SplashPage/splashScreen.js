@@ -12,7 +12,7 @@ LogBox.ignoreAllLogs();
 
 const InputExample = () => {
   const handleContinueButtonPress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('friend');
   };
   const saveNicknameList = async (nicknameList) => {
     try {
