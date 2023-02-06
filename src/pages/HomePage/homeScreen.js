@@ -1,61 +1,46 @@
-import React, { useState } from 'react';
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Text,
-  RefreshControl,
-  StyleSheet,
-  Button
-} from 'react-native';
-import searchFriend from '../searchFriend/searchFriend';
+import React from 'react';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { withNavigation } from 'react-navigation';
-import styles from './homeScreen.styles';
-import SplashScreen from 'react-native-splash-screen';
 
+const Box = ({ onPress, title }) => (
+  <TouchableOpacity onPress={onPress} style={styles.box}>
+    <Text>{title}</Text>
+  </TouchableOpacity>
+);
 
-const MyComponent = () => {
-  const [refreshing, setRefreshing] = useState(false);
+const homeScreen = ({ onBoxPress }) => {
   const navigation = useNavigation();
-  const handlePress = () => {
-    navigation.navigate('searchFriend');
-  };
-
-
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    // do some refreshing logic here
-    setTimeout(() => setRefreshing(false), 200);
-  };
-
   return (
-    <ScrollView
-      style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
-      <View style={styles.boxContainer}>
-        {[1, 2, 3, 4, 5, 6].map(i => (
-          <TouchableOpacity
-          key={i}
-          style={[styles.box, styles.shadow]}
-          onPress={index == 0 ? handlePress : () => this.props.navigation.navigate('splash')}
-        >
-        <Text>{index == 0 ? "Go to searchFriendPage" : "Go to SplashPage"}</Text>
-        <Text style={styles.header}>Box {i}</Text>
-            <Text style={styles.body}>
-              {index == 0 ? "Friend List" : "Check for friends "+ i }
-            </Text>
-      </TouchableOpacity>
-        ))}
-
-
-      </View>
+    <ScrollView>
+      <Box onPress={() => onBoxPress(1)} title="What is this bro" />
+      <Box onPress={() => onBoxPress(2)} title="Contact Us" />
+      <Box onPress={() => navigation.navigate("friend")} title="My friends" />
+      <Box onPress={() => navigation.navigate("map")} title="Where is my friends at?" />
+      <Box onPress={() => navigation.navigate("map")} title="Where is my friends at?" />
+      <Box onPress={() => navigation.navigate("map")} title="Where is my friends at?" />
+      <Box onPress={() => navigation.navigate("map")} title="Where is my friends at?" />
     </ScrollView>
   );
 };
 
+const styles = {
+  box: {
+  
+ 
+    height: 100,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+    backgroundColor: "orange",
+    alignSelf: 'center',
+    borderRadius:20,
+  },
+};
 
-export default MyComponent;
+export default homeScreen;
