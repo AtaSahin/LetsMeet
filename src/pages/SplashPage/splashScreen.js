@@ -12,7 +12,7 @@ LogBox.ignoreAllLogs();
 
 const InputExample = () => {
   const handleContinueButtonPress = () => {
-    navigation.navigate('friend');
+    navigation.navigate('friend', { nicknameList });
   };
   const saveNicknameList = async (nicknameList) => {
     try {
@@ -80,6 +80,7 @@ const navigation=useNavigation()
 
   const handleListPress = () => {
     setIsListVisible(!isListVisible);
+    navigation.navigate('NicknameList');
   }
 
   const handleDeletePress =(index) => {
@@ -135,7 +136,7 @@ const navigation=useNavigation()
     <View>
       
     <Text style={styles.success}>Congratulations, you've successfully registered as {successNickname}!</Text>
-    <TouchableOpacity style={styles.continueButton} onPress={()=> navigation.navigate("Home")}>
+    <TouchableOpacity style={styles.continueButton} onPress={()=> navigation.navigate("Home",{ nicknameList })}>
     <Text style={styles.continueButtonText}>Continue as {successNickname}</Text>
     </TouchableOpacity>
     </View>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,13 +12,18 @@ import DatePick from './src/pages/DatePick/DatePick';
 import SelectedDateTime from './src/pages/Plans/SelectedDateTime';
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+  const [nicknameList, setNicknameList] = useState([]);
+  const handleNicknameListChange = (newNicknameList) => {
+    setNicknameList(newNicknameList);
+  }
+  
   return (
 <NavigationContainer>
       <Stack.Navigator initialRouteName='splash'
       screenOptions={{
         headerShown: false
       }}>
+        {props => <InputExample {...props} onNicknameListChange={handleNicknameListChange} />}
         <Stack.Screen name="SelectedDateTime" component={SelectedDateTime} />
         <Stack.Screen name="datePick" component={DatePick} />
         <Stack.Screen name="searchFriend" component={searchFriend} />
