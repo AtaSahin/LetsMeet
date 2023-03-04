@@ -3,6 +3,9 @@ import { View, Text, FlatList, TextInput, TouchableOpacity,StyleSheet, Button } 
 import HomeScreen from '../../HomePage/homeScreen';
 
 import { useNavigation } from '@react-navigation/native';
+import MyFriends from '../../searchFriend/searchFriend';
+import { ScrollView } from 'react-native-gesture-handler';
+import MyHeader from '../../../Components/Header/Header';
 
 const FriendsList = () => {
   const [searchText, setSearchText] = useState('');
@@ -12,7 +15,10 @@ const FriendsList = () => {
   }
   const navigation=useNavigation()
   return (
+    <ScrollView>
+     <MyHeader></MyHeader>
     <View>
+ 
               <TouchableOpacity 
                 style={styles.undoButton} 
                 onPress={()=>  navigation.goBack()}
@@ -34,6 +40,7 @@ const FriendsList = () => {
         { /* here you can map through your data and render the users*/}
       </View>
     </View>
+    </ScrollView>
   );
 };
 
