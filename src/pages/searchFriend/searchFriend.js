@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import MyHeader from '../../Components/Header/Header';
 
 const MyFriends = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,11 +12,13 @@ const MyFriends = () => {
 
   return (
     <View>
+
       <TextInput
         placeholder="Search for a friend"
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
+         <MyHeader></MyHeader>
       <TouchableOpacity onPress={handleSearch}>
         <Text>Search</Text>
       </TouchableOpacity>

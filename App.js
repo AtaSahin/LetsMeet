@@ -8,6 +8,8 @@ import InputExample from './src/pages/SplashPage/splashScreen';
 import FriendList from './src/pages/menu/myFriendsPage/friendList';
 import WorldMap from './src/pages/menu/map/worldMap';
 import searchFriend from './src/pages/searchFriend/searchFriend';
+import DatePick from './src/pages/DatePick/DatePick';
+import SelectedDateTime from './src/pages/Plans/SelectedDateTime';
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -17,6 +19,8 @@ export default function App() {
       screenOptions={{
         headerShown: false
       }}>
+        <Stack.Screen name="SelectedDateTime" component={SelectedDateTime} />
+        <Stack.Screen name="datePick" component={DatePick} />
         <Stack.Screen name="searchFriend" component={searchFriend} />
         <Stack.Screen name="map" component={WorldMap} />
         <Stack.Screen name="friend" component={FriendList} />
